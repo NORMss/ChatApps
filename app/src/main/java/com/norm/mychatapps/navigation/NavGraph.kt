@@ -8,6 +8,8 @@ import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.norm.mychatapps.presentation.screen.auth.AuthScreen
+import com.norm.mychatapps.presentation.screen.home.HomeScreen
 
 @Composable
 fun SetupNavGraph(
@@ -18,8 +20,27 @@ fun SetupNavGraph(
         navController = navController,
         startDestination = startDestination,
     ) {
-        composable<Screen.Auth> { }
-        composable<Screen.Home> { }
+        composable<Screen.Auth> {
+            AuthScreen(
+                onAuthenticated = {
+                    navController.popBackStack()
+                    navController.navigate(Screen.Home)
+                }
+            )
+        }
+        composable<Screen.Home> {
+            HomeScreen(
+                onLogout = {
+
+                },
+                onChatRoom = {
+
+                },
+                onCharRoomSelect = { text ->
+
+                }
+            )
+        }
         composable<Screen.Chat> { }
         composable<Screen.ChatRoom> { }
     }
