@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.norm.mychatapps.presentation.screen.auth.AuthScreen
+import com.norm.mychatapps.presentation.screen.create_room.CreateRoomScreen
 import com.norm.mychatapps.presentation.screen.home.HomeScreen
 
 @Composable
@@ -31,17 +32,28 @@ fun SetupNavGraph(
         composable<Screen.Home> {
             HomeScreen(
                 onLogout = {
-
+                    navController.popBackStack()
+                    navController.navigate(Screen.Auth)
                 },
-                onChatRoom = {
-
+                onCrateRoom = {
+                    navController.navigate(Screen.ChatRoom)
                 },
-                onCharRoomSelect = { text ->
-
+                onCharRoomSelect = {
+                    navController.navigate(Screen.Chat(id = it))
+                },
+            )
+        }
+        composable<Screen.Chat> {
+            CreateRoomScreen(
+                openChatScreen = {
+                    navController.popBackStack()
+                    navController.navigate(Screen.Chat(id = it))
+                },
+                onBackClick = {
+                    navController.navigateUp()
                 }
             )
         }
-        composable<Screen.Chat> { }
         composable<Screen.ChatRoom> { }
     }
 }
