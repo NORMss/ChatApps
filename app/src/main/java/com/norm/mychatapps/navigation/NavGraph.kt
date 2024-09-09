@@ -1,13 +1,10 @@
 package com.norm.mychatapps.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.norm.mychatapps.presentation.chat.ChatScreen
 import com.norm.mychatapps.presentation.screen.auth.AuthScreen
 import com.norm.mychatapps.presentation.screen.create_room.CreateRoomScreen
 import com.norm.mychatapps.presentation.screen.home.HomeScreen
@@ -54,6 +51,12 @@ fun SetupNavGraph(
                 }
             )
         }
-        composable<Screen.ChatRoom> { }
+        composable<Screen.ChatRoom> {
+            ChatScreen(
+                onBackClick = {
+                    navController.navigateUp()
+                }
+            )
+        }
     }
 }
